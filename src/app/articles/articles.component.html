@@ -1,0 +1,31 @@
+<h1 style="margin: auto;
+width: 15%;">Les Articles</h1>
+<br>
+<style>
+    fieldset {
+        border: 1px solid rgb(0,0,0);
+        width: 500px;
+        margin:auto;
+      }
+      input{
+        margin: auto;
+        width: 100%;
+      }
+</style>
+<input type="text" [(ngModel)]="nombreArticlesAffiches">
+<br>
+<br>
+<br>
+<section *ngFor="let A of listeArticle">
+    <div *ngIf="A.categorie != 'Travail'  && listeArticle.indexOf(A) < nombreArticlesAffiches">
+        <div [style.color]="A.categorie === 'Education' ? 'blue' : 'inherit'">
+    <fieldset >
+        <legend>{{A.titre}}</legend>
+        <h4>Auteur: {{A.auteur}}</h4>
+        <h4>Date: {{A.date}}</h4>
+        <h4>contenu: {{A.contenu}}</h4>
+    </fieldset>
+<br>
+</div>
+    </div>
+</section>
