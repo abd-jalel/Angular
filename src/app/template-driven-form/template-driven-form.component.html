@@ -1,0 +1,34 @@
+<form #addform="ngForm" (ngSubmit)="addForm(addform)">
+<fieldset>
+    <legend>Information générale</legend>
+    <label>Nom</label>
+    <input type="text" name="nom" ngModel required #nom="ngModel">
+    <span *ngIf="nom.invalid && nom.touched" style="color:red">Saisir le nom</span>
+    <br>
+    <label>Email</label>
+    <input type="email" name="email" ngModel  required pattern="[a-zA-Z0-9._%+-]+[.]+[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{3}" #email="ngModel">
+    <span *ngIf="email?.errors?.['required'] && email.touched" style="color:red">Saisir l'email </span>
+    <span *ngIf="email?.errors?.['pattern'] && email.touched" style="color:red">Invalid email </span>
+    <br>
+    <fieldset>
+        <legend>Information de paiement</legend>
+        <label>Type de carte</label>
+        <input type="text" name="type" ngModel required #type="ngModel">
+        <span *ngIf="type.invalid && type.touched" style="color:red">Saisir le type de la carte</span>
+        <br>
+        <label>Numéro carte</label>
+        <input type="text" name="num" ngModel required minlength="16" maxlength="16" #num="ngModel">
+        <span *ngIf="num?.errors?.['required'] && num.touched" style="color:red">Saisir le numéro de la carte </span>
+        <span *ngIf="num?.errors?.['minlength'] && num.touched" style="color:red">Invalid numéro </span>
+        <span *ngIf="num?.errors?.['maxlength'] && num.touched" style="color:red">Invalid numéro </span>
+        <br>
+        <label>Date expiration</label>
+        <input type="text" name="date" ngModel required #date="ngModel">
+        <span *ngIf="date.invalid && date.touched" style="color:red">Saisir le nom</span>
+        <br>
+        <label>Code</label>
+        <input type="text" [disabled]="date.invalid ||num.invalid ||type.invalid">
+    </fieldset>
+    <button class="btn btn-primary" type="submit" [disabled]="addform.invalid">Ajouter</button>
+</fieldset>
+</form>
